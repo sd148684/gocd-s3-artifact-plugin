@@ -3,6 +3,7 @@ import diogomrol.gocd.s3.artifact.plugin.model.ArtifactStoreConfig;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -22,7 +23,11 @@ public class S3ClientFactory {
     private static AmazonS3 createClient(ArtifactStoreConfig artifactStoreConfig) throws SdkClientException {
         AmazonS3ClientBuilder s3ClientBuilder = AmazonS3ClientBuilder.standard();
 
-        if (StringUtils.isNotBlank(artifactStoreConfig.getRegion())) {
+        if(StringUtils.isNotBlank(artifactStoreConfig.getS3endpoint())) {
+            s3ClientBuilder = s3ClientBuilder.withEndpointConfiguration(
+                    new AwsClientBuilder.EndpointConfiguration(artifactStoreConfig.getS3endpoint(), artifactStoreConfig.getRegion())
+            );
+        } else if (StringUtils.isNotBlank(artifactStoreConfig.getRegion())) {
             s3ClientBuilder = s3ClientBuilder.withRegion(Regions.fromName(artifactStoreConfig.getRegion()));
         }
 

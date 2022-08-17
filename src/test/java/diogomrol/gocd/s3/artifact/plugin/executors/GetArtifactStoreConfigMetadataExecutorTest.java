@@ -37,6 +37,13 @@ public class GetArtifactStoreConfigMetadataExecutorTest {
                 "    }\n" +
                 "  },\n" +
                 "  {\n" +
+                "    \"key\": \"S3Endpoint\",\n" +
+                "    \"metadata\": {\n" +
+                "      \"required\": false,\n" +
+                "      \"secure\": false\n" +
+                "    }\n" +
+                "  },\n" +
+                "  {\n" +
                 "    \"key\": \"Region\",\n" +
                 "    \"metadata\": {\n" +
                 "      \"required\": false,\n" +

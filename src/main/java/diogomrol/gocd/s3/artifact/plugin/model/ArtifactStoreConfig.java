@@ -30,13 +30,18 @@ import java.util.List;
 
 public class ArtifactStoreConfig implements Validatable {
 
-    private static final ImmutableSet<String> OPTIONAL_PROPERTIES = ImmutableSet.of("Region", "AWSAccessKey", "AWSSecretAccessKey");
+    private static final ImmutableSet<String> OPTIONAL_PROPERTIES = ImmutableSet.of("S3Endpoint", "Region", "AWSAccessKey", "AWSSecretAccessKey");
     private static final ImmutableSet<String> AWS_ACCESS_PROPERTIES = ImmutableSet.of("AWSAccessKey", "AWSSecretAccessKey");
 
     @Expose
     @SerializedName("S3Bucket")
     @FieldMetadata(key = "S3Bucket", required = true)
     private String s3bucket;
+
+    @Expose
+    @SerializedName("S3Endpoint")
+    @FieldMetadata(key = "S3Endpoint", required = false)
+    private String s3endpoint;
 
     @Expose
     @SerializedName("Region")
@@ -70,6 +75,8 @@ public class ArtifactStoreConfig implements Validatable {
 
     public String getRegion () { return region; }
 
+    public String getS3endpoint () { return s3endpoint; }
+
     public String getAwsaccesskey() {
         return awsaccesskey;
     }
@@ -86,6 +93,7 @@ public class ArtifactStoreConfig implements Validatable {
         ArtifactStoreConfig that = (ArtifactStoreConfig) o;
 
         if (s3bucket != null ? !s3bucket.equals(that.s3bucket) : that.s3bucket != null) return false;
+        if (s3endpoint != null ? !s3endpoint.equals(that.s3endpoint) : that.s3endpoint != null) return false;
         if (region != null ? !region.equals(that.region) : that.region != null) return false;
         if (awsaccesskey != null ? !awsaccesskey.equals(that.awsaccesskey) : that.awsaccesskey != null) return false;
         return awssecretaccesskey != null ? awssecretaccesskey.equals(that.awssecretaccesskey) : that.awssecretaccesskey == null;
@@ -95,6 +103,7 @@ public class ArtifactStoreConfig implements Validatable {
     public int hashCode() {
         int result = s3bucket != null ? s3bucket.hashCode() : 0;
         result = 31 * result + (region != null ? region.hashCode() : 0);
+        result = 31 * result + (s3endpoint != null ? s3endpoint.hashCode() : 0);
         result = 31 * result + (awsaccesskey != null ? awsaccesskey.hashCode() : 0);
         result = 31 * result + (awssecretaccesskey != null ? awssecretaccesskey.hashCode() : 0);
         return result;

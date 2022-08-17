@@ -49,7 +49,11 @@ public class S3ArtifactPlugin implements GoPlugin {
     @Override
     public GoPluginApiResponse handle(GoPluginApiRequest request) {
         try {
-            switch (Request.fromString(request.requestName())) {
+            final Request pluginRequest = Request.fromString(request.requestName());
+            if(pluginRequest == null) {
+                throw new UnhandledRequestTypeException(request.requestName());
+            }
+            switch (pluginRequest) {
                 case REQUEST_GET_PLUGIN_ICON:
                     return new GetPluginIconExecutor().execute();
                 case REQUEST_GET_PLUGIN_CAPABILITIES:
