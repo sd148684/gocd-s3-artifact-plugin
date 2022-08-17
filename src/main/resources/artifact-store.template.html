@@ -5,6 +5,12 @@
 </div>
 
 <div class="form_item_block">
+    <label ng-class="{'is-invalid-label': GOINPUTNAME[S3Endpoint].$error.server}">S3 Endpoint:</label>
+    <input ng-class="{'is-invalid-input': GOINPUTNAME[S3Endpoint].$error.server}" type="text" ng-model="S3Endpoint" ng-required="false"/>
+    <span class="form_error form-error" ng-class="{'is-visible': GOINPUTNAME[S3Endpoint].$error.server}" ng-show="GOINPUTNAME[S3Endpoint].$error.server">{{GOINPUTNAME[S3Endpoint].$error.server}}</span>
+</div>
+
+<div class="form_item_block">
     <label ng-class="{'is-invalid-label': GOINPUTNAME[Region].$error.server}">Region:<span class='asterix'>*</span></label>
     <select ng-class="{'is-invalid-input': GOINPUTNAME[Region].$error.server}" ng-model="Region" ng-required="true">
         <option value="ap-northeast-1">ap-northeast-1</option>
@@ -26,6 +32,8 @@
         <option value="us-east-2">us-east-2</option>
         <option value="us-west-1">us-west-1</option>
         <option value="us-west-2">us-west-2</option>
+        <option value="beijing">beijing</option>
+        <option value="shanghai">shanghai</option>
     </select>
     <span class="form_error form-error" ng-class="{'is-visible': GOINPUTNAME[Region].$error.server}" ng-show="GOINPUTNAME[Region].$error.server">{{GOINPUTNAME[Region].$error.server}}</span>
 </div>
